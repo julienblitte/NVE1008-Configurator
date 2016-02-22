@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script>
+function getvalue()
+{
+	var stream=document.getElementById("stream").value;
+	var variable=document.getElementById("variable").value;
+	
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	if (this.readyState == 4 && this.status == 200)
+	{
+		document.getElementById("value").value = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/cgi-bin/get.cgi"+
+	"?stream=" + encodeURIComponent(stream) +
+	"&variable=" + encodeURIComponent(variable)
+	, true);
+  xhttp.send();
+}
+function setvalue()
+{
+	var stream=document.getElementById("stream").value;
+	var variable=document.getElementById("variable").value;
+	var value=document.getElementById("value").value;
+	
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	if (this.readyState == 4 && this.status == 200)
+	{
+		alert(this.responseText);
+    }
+  };
+  xhttp.open("GET", "/cgi-bin/set.cgi"+
+	"?stream=" + encodeURIComponent(stream) +
+	"&variable=" + encodeURIComponent(variable) + 
+	"&value=" + encodeURIComponent(value)
+	, true);
+  xhttp.send();
+}
+</script>
+</head>
+<body>
+<p>Julien Blitte's advanced NVE1008 configuration editor</p>
+<p><strong>Be careful, any change may cause fatal malfunctioning</strong></p>
+<table>
+<tr><td>channel</td><td>
+<select id="stream" name="stream">
+<option value="stream1">video101</option>
+<option value="stream2">video102</option>
+<option value="stream3">video201</option>
+<option value="stream4">video202</option>
+<option value="stream5">video301</option>
+<option value="stream6">video302</option>
+<option value="stream7">video401</option>
+<option value="stream8">video402</option>
+<option value="stream9">video501</option>
+<option value="stream10">video502</option>
+<option value="stream11">video601</option>
+<option value="stream12">video602</option>
+<option value="stream13">video701</option>
+<option value="stream14">video702</option>
+<option value="stream15">video801</option>
+<option value="stream16">video802</option>
+</select></td></tr>
+<tr><td>variable</td><td>
+<select id="variable" name="variable">
+<option value="szStreamName">szStreamName</option>
+<option value="dwHasAudioInput">dwHasAudioInput</option>
+<option value="inputChannel">inputChannel</option>
+<option value="resolution">resolution</option>
+<option value="standard">standard</option>
+<option value="dwBrightness">dwBrightness</option>
+<option value="dwContrast">dwContrast</option>
+<option value="dwSaturation">dwSaturation</option>
+<option value="rcMode">rcMode</option>
+<option value="dwQuantifier">dwQuantifier</option>
+<option value="dwBitrate">dwBitrate</option>
+<option value="dwBitrateMax">dwBitrateMax</option>
+<option value="dwMinGop">dwMinGop</option>
+<option value="dwMaxGop">dwMaxGop</option>
+<option value="dwVbvSize">dwVbvSize</option>
+<option value="dwQualityFlag">dwQualityFlag</option>
+<option value="dwIsInterlaced">dwIsInterlaced</option>
+<option value="dwIncludeBvop">dwIncludeBvop</option>
+<option value="dwIsAuthenticationEnabled">dwIsAuthenticationEnabled</option>
+<option value="dwAuthenticationKey">dwAuthenticationKey</option>
+<option value="dwTemporalFrameDecimation">dwTemporalFrameDecimation</option>
+<option value="outputType">outputType</option>
+<option value="outputNameName">outputNameName</option>
+<option value="dwIsMulticastEnabled">dwIsMulticastEnabled</option>
+<option value="dwTtlNumber">dwTtlNumber</option>
+<option value="szMulticastIpAddress">szMulticastIpAddress</option>
+<option value="dwPortNumber">dwPortNumber</option>
+<option value="dwIsMdEnabled">dwIsMdEnabled</option>
+<option value="mdParams.dwEventInterval">mdParams.dwEventInterval</option>
+<option value="mdParams.dwTh1">mdParams.dwTh1</option>
+<option value="mdParams.dwTh2">mdParams.dwTh2</option>
+<option value="mdParams.dwTh3">mdParams.dwTh3</option>
+<option value="obsParams.dwIsEnabled">obsParams.dwIsEnabled</option>
+<option value="obsParams.dwBrightnessthreshold">obsParams.dwBrightnessthreshold</option>
+<option value="obsParams.dwTemporalDecimation">obsParams.dwTemporalDecimation</option>
+<option value="obsParams.dwComputeDepth">obsParams.dwComputeDepth</option>
+<option value="dwIsOsdEnabled">dwIsOsdEnabled</option>
+<option value="dwNbOsds">dwNbOsds</option>
+<option value="dwIsOvobEnabled">dwIsOvobEnabled</option>
+<option value="dwIsTerminationEnabled">dwIsTerminationEnabled</option>
+<option value="dwIsStreamingEnabled">dwIsStreamingEnabled</option>
+<option value="szSubtitle">szSubtitle</option>
+<option value="dwAudioVolume">dwAudioVolume</option>
+<option value="dwFlags">dwFlags</option>
+</select></td></tr>
+<tr><td>value</td><td><input type="text" id="value" name="value"></td></tr>
+<tr><td></td><td><input type="button" value="get" onclick="getvalue()">&nbsp;<input type="button" value="set" onclick="setvalue()"></td></tr>
+</table>
+</body>
+</html>
